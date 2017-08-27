@@ -24,6 +24,11 @@ public class PathPositionAnimation : Animation<CGFloat>, Animatable {
             createKeyframeAnimation()
         }
     }
+    public var calculationMode : String = kCAAnimationPaced {
+        didSet {
+            createKeyframeAnimation()
+        }
+    }
     
     public init(view: UIView, path: CGPath?) {
         self.view = view
@@ -54,6 +59,7 @@ public class PathPositionAnimation : Animation<CGFloat>, Animatable {
     
     @objc private func createKeyframeAnimation() {
         // Set up a CAKeyframeAnimation to move the view along the path
+        view.layer.removeAnimation(forKey: animationKey)
         view.layer.add(pathAnimation(), forKey: animationKey)
         view.layer.speed = 0
         view.layer.timeOffset = 0
@@ -66,7 +72,7 @@ public class PathPositionAnimation : Animation<CGFloat>, Animatable {
         animation.duration = 1
         animation.isAdditive = true
         animation.repeatCount = Float.infinity
-        animation.calculationMode = kCAAnimationPaced
+        animation.calculationMode = calculationMode
         animation.rotationMode = rotationMode
         animation.fillMode = kCAFillModeBoth
         animation.isRemovedOnCompletion = false

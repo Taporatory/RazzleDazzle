@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 /**
 Keeps an array of all of the animations being controlled, and calls the `animate:` function on each.
