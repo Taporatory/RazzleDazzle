@@ -29,6 +29,11 @@ public class PathPositionAnimation : Animation<CGFloat>, Animatable {
             createKeyframeAnimation()
         }
     }
+    public var speed : Float = 0.0 {
+        didSet {
+            createKeyframeAnimation()
+        }
+    }
     
     public init(view: UIView, path: CGPath?) {
         self.view = view
@@ -61,7 +66,7 @@ public class PathPositionAnimation : Animation<CGFloat>, Animatable {
         // Set up a CAKeyframeAnimation to move the view along the path
         view.layer.removeAnimation(forKey: animationKey)
         view.layer.add(pathAnimation(), forKey: animationKey)
-        view.layer.speed = 0
+        view.layer.speed = speed
         view.layer.timeOffset = 0
     }
     
